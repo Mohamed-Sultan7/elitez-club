@@ -98,7 +98,7 @@ const Jail = () => {
       
       {/* Footer */}
       <div className="mt-8 text-center text-white/40 text-sm z-10">
-        © 2025 Elitez Club Academy. All rights reserved.
+        © 2026 Elitez Club Academy. All rights reserved.
       </div>
     </div>
   );

@@ -24,7 +24,7 @@ const Launcher = () => {
             <div className="space-y-8 grid">
                 <Link to="/signup">
                     <GoldButton type="button" className="w-full text-lg py-6 flex justify-center">
-                        Join Academy Now
+                        Claim Free Access
                         <ArrowRight className="mr-2" />
                     </GoldButton>
                 </Link>
@@ -39,7 +39,7 @@ const Launcher = () => {
         </div>
 
         <div className="text-center mt-8 text-white/50">
-            © 2025 Elitez Club Academy. All rights reserved.
+            © 2026 Elitez Club Academy. All rights reserved.
         </div>
     </div>
 </div>
