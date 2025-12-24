@@ -1,0 +1,6 @@
+node_modules/
+dist/
+build/
+firebase/
+.trae/
+.DS_Store
