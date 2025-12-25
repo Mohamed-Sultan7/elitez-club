@@ -35,7 +35,7 @@ const Affiliate = () => {
               </p>
               
               <a 
-                href="https://t.me/elitez_club" 
+                href="https://t.me/elitez_club7" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-block"

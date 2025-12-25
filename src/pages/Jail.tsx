@@ -47,7 +47,7 @@ const Jail = () => {
             <div className="flex flex-col md:flex-row gap-4 w-full max-w-md">
               <GoldButton 
                 className="flex items-center justify-center text-lg py-5 flex-1"
-                onClick={() => window.open('https://t.me/elitez_club', '_blank')}
+                onClick={() => window.open('https://t.me/elitez_club7', '_blank')}
               >
                 <CreditCard className="mr-2 h-5 w-5" />
                 Renew Subscription
@@ -56,7 +56,7 @@ const Jail = () => {
               <GoldButton 
                 variant="outline" 
                 className="flex items-center justify-center text-lg py-5 flex-1"
-                onClick={() => window.open('https://t.me/elitez_club', '_blank')}
+                onClick={() => window.open('https://t.me/elitez_club7', '_blank')}
               >
                 Request Help
               </GoldButton>
