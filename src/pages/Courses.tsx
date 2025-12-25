@@ -45,8 +45,7 @@ const Courses = () => {
   }, [user]);
   
   // List of admin emails
-  const adminEmails = ['ichrakchraibi5@gmail.com', 'mohamed.sultan.7744@gmail.com', 'elitez.club7@gmail.com
-'];
+  const adminEmails = ['ichrakchraibi5@gmail.com', 'mohamed.sultan.7744@gmail.com', 'elitez.club7@gmail.com'];
 
   // Fetch courses from Supabase
   useEffect(() => {

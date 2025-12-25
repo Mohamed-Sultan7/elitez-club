@@ -19,8 +19,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   const [unreadCount, setUnreadCount] = useState(0);
 
   // List of admin emails that can access admin features
-  const adminEmails = ['ichrakchraibi5@gmail.com', 'mohamed.sultan.7744@gmail.com', 'elitez.club7@gmail.com
-'];
+  const adminEmails = ['ichrakchraibi5@gmail.com', 'mohamed.sultan.7744@gmail.com', 'elitez.club7@gmail.com'];
   
   // Check if current user is an admin
   const isAdmin = user && adminEmails.includes(user.email || '');
