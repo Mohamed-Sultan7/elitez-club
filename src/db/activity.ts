@@ -83,7 +83,8 @@ async function isAdminUser(userId: string): Promise<boolean> {
   try {
     const { data: profile } = await supabase.from('profiles').select('email').eq('id', userId).maybeSingle();
     const email = profile?.email || '';
-    const fallbackAdmins = ['ichrakchraibi5@gmail.com', 'mohamed.sultan.7744@gmail.com', 'toparabg@gmail.com'];
+    const fallbackAdmins = ['ichrakchraibi5@gmail.com', 'mohamed.sultan.7744@gmail.com', 'elitez.club7@gmail.com
+'];
     return fallbackAdmins.includes(email);
   } catch {}
   return false;
@@ -143,7 +144,8 @@ export async function listAdminUserIds(): Promise<Set<string>> {
     if (result.size > 0) return result;
   } catch {}
   try {
-    const fallbackAdmins = ['ichrakchraibi5@gmail.com', 'mohamed.sultan.7744@gmail.com', 'toparabg@gmail.com'];
+    const fallbackAdmins = ['ichrakchraibi5@gmail.com', 'mohamed.sultan.7744@gmail.com', 'elitez.club7@gmail.com
+'];
     const { data } = await supabase.from('profiles').select('id, email').in('email', fallbackAdmins);
     (data || []).forEach((r: any) => result.add(r.id));
   } catch {}

@@ -86,7 +86,8 @@ const CustomerSupport: React.FC = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // List of admin emails that can access admin features
-  const adminEmails = ['ichrakchraibi5@gmail.com', 'mohamed.sultan.7744@gmail.com', 'toparabg@gmail.com'];
+  const adminEmails = ['ichrakchraibi5@gmail.com', 'mohamed.sultan.7744@gmail.com', 'elitez.club7@gmail.com
+'];
   
   // Check if current user is an admin
   const isAdmin = user && adminEmails.includes(user.email || '');

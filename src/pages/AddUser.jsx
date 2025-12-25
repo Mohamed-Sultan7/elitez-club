@@ -28,7 +28,8 @@ const AddUser = () => {
   const { toast } = useToast();
 
   // List of admin emails that can access this page
-  const adminEmails = ['ichrakchraibi5@gmail.com', 'mohamed.sultan.7744@gmail.com', 'toparabg@gmail.com'];
+  const adminEmails = ['ichrakchraibi5@gmail.com', 'mohamed.sultan.7744@gmail.com', 'elitez.club7@gmail.com
+'];
 
   // Handle membership type change and set default days
    const handleMembershipTypeChange = (value) => {

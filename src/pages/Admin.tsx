@@ -14,7 +14,8 @@ const Admin = () => {
   const [unreadCount, setUnreadCount] = useState(0);
 
   // List of admin emails that can access this page
-  const adminEmails = ['ichrakchraibi5@gmail.com', 'mohamed.sultan.7744@gmail.com', 'toparabg@gmail.com'];
+  const adminEmails = ['ichrakchraibi5@gmail.com', 'mohamed.sultan.7744@gmail.com', 'elitez.club7@gmail.com
+'];
   
   // Protect the admin page - only accessible by admins
   useEffect(() => {

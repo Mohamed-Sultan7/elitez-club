@@ -50,7 +50,8 @@ const MonitorStudents = () => {
   const [membershipFilter, setMembershipFilter] = useState<'active' | 'expired' | 'freetrial' | 'all'>('active');
 
   // List of admin emails that can access this page
-  const adminEmails = ['ichrakchraibi5@gmail.com', 'mohamed.sultan.7744@gmail.com', 'toparabg@gmail.com'];
+  const adminEmails = ['ichrakchraibi5@gmail.com', 'mohamed.sultan.7744@gmail.com', 'elitez.club7@gmail.com
+'];
 
   // Protect the admin page - only accessible by admins
   useEffect(() => {
@@ -75,7 +76,8 @@ const MonitorStudents = () => {
         const { data: adminUsers } = await supabase.from('admin_users').select('user_id');
         const adminSet = new Set<string>((adminUsers || []).map((r: any) => r.user_id));
         if (adminSet.size === 0) {
-          const fallbackAdmins = ['ichrakchraibi5@gmail.com', 'mohamed.sultan.7744@gmail.com', 'toparabg@gmail.com'];
+          const fallbackAdmins = ['ichrakchraibi5@gmail.com', 'mohamed.sultan.7744@gmail.com', 'elitez.club7@gmail.com
+'];
           profiles.forEach(p => {
             if (fallbackAdmins.includes(p.email || '')) adminSet.add(p.id);
           });

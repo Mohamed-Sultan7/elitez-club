@@ -88,7 +88,8 @@ const CourseVideo = () => {
   const { logActivity } = useActivityLogger();
   
   // List of admin emails
-  const adminEmails = ['ichrakchraibi5@gmail.com', 'mohamed.sultan.7744@gmail.com', 'toparabg@gmail.com'];
+  const adminEmails = ['ichrakchraibi5@gmail.com', 'mohamed.sultan.7744@gmail.com', 'elitez.club7@gmail.com
+'];
 
   // Function to check if user can modify a comment
   const canModifyComment = (comment: Comment) => {
