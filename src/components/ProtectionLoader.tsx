@@ -4,8 +4,7 @@ import { useAuth } from "@/context/AuthContext";
 const adminEmails = [
   "ichrakchraibi5@gmail.com",
   "mohamed.sultan.7744@gmail.com",
-  "elitez.club7@gmail.com"
-",
+  "elitez.club7@gmail.com",
 ];
 
 const ProtectionLoader = () => {
