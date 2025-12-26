@@ -114,6 +114,7 @@ export async function ensureMyProfileExists(): Promise<void> {
       .from('profiles')
       .upsert({ 
         id: user.id, 
+        email: user.email,
         name: displayName, 
         avatar_url: avatarUrl,
         bio: bio,
