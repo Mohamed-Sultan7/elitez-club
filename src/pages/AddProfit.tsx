@@ -81,10 +81,10 @@ const AddProfit = () => {
     const newPreviews: string[] = [];
 
     fileArray.forEach(file => {
-      if (file.size > 300 * 1024) { // 300KB limit
+      if (file.size > 500 * 1024) { // 500KB limit
         toast({
           title: "File too large",
-          description: `File ${file.name} must be less than 300KB`,
+          description: `File ${file.name} must be less than 500KB`,
           variant: "destructive",
         });
         return;
@@ -415,7 +415,7 @@ const AddProfit = () => {
                       }
                     </p>
                     <p className="text-white/60 text-sm">
-                      Max: 300KB per image • PNG, JPG, JPEG
+                      Max: 500KB per image • PNG, JPG, JPEG
                     </p>
                     {imageFiles.length > 0 && (
                       <p className="text-gold text-sm mt-2">

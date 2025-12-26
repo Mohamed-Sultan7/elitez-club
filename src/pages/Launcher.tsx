@@ -23,7 +23,7 @@ const Launcher = () => {
     <div className="w-full max-w-md z-10 animate-fade-in">
         <div className="mb-8 text-center">
             <img src="/logo.png" alt="Elitez Club" className="h-32 mx-auto mb-6 animate-pulse-slow" />
-            <p className="text-xl text-gold">Elitez Club Academy • For The Elite Only</p>
+            <p className="text-xl text-gold">Elitez Club • For The Elites Only</p>
         </div>
 
         <div className="glass rounded-lg p-8 border border-white/10 animate-fade-in space-y-8">

@@ -199,11 +199,11 @@ const EditUser = () => {
     if (e.target.files[0]) {
       const file = e.target.files[0];
       
-      // Check file size (300KB limit)
-      if (file.size > 300 * 1024) {
+      // Check file size (500KB limit)
+      if (file.size > 500 * 1024) {
         toast({
           title: "File size error",
-          description: "Image size must be less than 300KB.",
+          description: "Image size must be less than 500KB.",
           variant: "destructive",
         });
         return;

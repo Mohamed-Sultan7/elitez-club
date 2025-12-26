@@ -351,6 +351,53 @@ const StudentActivity = () => {
   // Get unique activity types for filter
   const activityTypes = Array.from(new Set(activities.map(a => a.type)));
 
+  const buildActivityPath = (activity: ActivityLogWithId): string | null => {
+    const d: any = activity.details || {};
+    switch (activity.type) {
+      case 'WATCH_LESSON':
+      case 'ADD_COMMENT':
+      case 'EDIT_COMMENT':
+      case 'DELETE_COMMENT':
+        if (d.courseId && d.moduleId && d.lessonId) {
+          return `/course/${d.courseId}/module/${d.moduleId}/lesson/${d.lessonId}`;
+        }
+        return null;
+      case 'MODULE_ACCESS':
+        if (d.courseId && d.moduleId) {
+          return `/course/${d.courseId}/module/${d.moduleId}`;
+        }
+        return null;
+      case 'COURSE_ACCESS':
+        if (d.courseId) {
+          return `/course/${d.courseId}`;
+        }
+        return null;
+      case 'PAGE_VISIT':
+        return typeof d.page === 'string' ? d.page : null;
+      case 'SETTINGS_VIEW':
+      case 'SETTINGS_UPDATE':
+        return '/settings';
+      case 'SUBSCRIPTION_VIEW':
+        return '/subscription';
+      case 'AFFILIATE_VIEW':
+        return '/affiliate';
+      case 'DAILY_MOTIVATION_VIEW':
+        return '/daily-motivation';
+      case 'HOME_VIEW':
+        return '/home';
+      case 'COURSES_VIEW':
+        return '/courses';
+      case 'SUPPORT_VIEW':
+        return '/support';
+      case 'LOGIN':
+        return '/home';
+      case 'LOGOUT':
+        return '/login';
+      default:
+        return null;
+    }
+  };
+
   // Reset user activity function
   const handleResetActivity = async () => {
     if (!userId) return;
@@ -611,13 +658,54 @@ const StudentActivity = () => {
                             <Clock className="w-3 h-3" />
                             {formatTimestamp(activity.timestamp)}
                           </div>
+                          {(() => {
+                            const path = buildActivityPath(activity);
+                            if (!path) return null;
+                            return (
+                              <Link
+                                to={path}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 text-white/80 text-sm bg-gold/20 hover:bg-gold/30 border border-gold/30 hover:border-gold/50 px-3 py-1 rounded-full transition-colors"
+                                title="Open Page"
+                              >
+                                <ExternalLink className="w-3 h-3 text-gold" />
+                                <span className="text-white">Open Page</span>
+                              </Link>
+                            );
+                          })()}
                         </div>
                       </div>
 
+                      {activity.type === 'WATCH_LESSON' && (
+                        <div className="flex flex-wrap items-center gap-2 mb-4">
+                          {activity.details?.courseName && (
+                            <div className="inline-flex items-center gap-2 bg-white/5 text-white/80 text-sm px-3 py-1 rounded-full border border-white/10">
+                              <BookOpen className="w-4 h-4 text-gold" />
+                              <span className="font-medium">Course:</span>
+                              <span className="text-white">{activity.details.courseName}</span>
+                            </div>
+                          )}
+                          {activity.details?.moduleName && (
+                            <div className="inline-flex items-center gap-2 bg-white/5 text-white/80 text-sm px-3 py-1 rounded-full border border-white/10">
+                              <FolderOpen className="w-4 h-4 text-orange-400" />
+                              <span className="font-medium">Module:</span>
+                              <span className="text-white">{activity.details.moduleName}</span>
+                            </div>
+                          )}
+                          {activity.details?.lessonName && (
+                            <div className="inline-flex items-center gap-2 bg-white/5 text-white/80 text-sm px-3 py-1 rounded-full border border-white/10">
+                              <Play className="w-4 h-4 text-gold" />
+                              <span className="font-medium">Lesson:</span>
+                              <span className="text-white">{activity.details.lessonName}</span>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
                       
 
-                      {/* Technical Details */}
-                      <div className="bg-gradient-to-r from-white/5 to-white/3 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+                       <div className="bg-gradient-to-r from-white/5 to-white/3 backdrop-blur-sm rounded-xl p-4 border border-white/10">
                         <div className="flex items-center gap-2 mb-3">
                           <div className="w-2 h-2 rounded-full bg-cyan-400"></div>
                           <h4 className="text-white font-medium text-sm">Technical Info</h4>

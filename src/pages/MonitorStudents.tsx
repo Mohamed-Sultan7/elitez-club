@@ -7,6 +7,7 @@ import GlassmorphicCard from '@/components/GlassmorphicCard';
 import { Search, Activity, ArrowLeft, User, Calendar, Eye, MessageCircle, Filter } from 'lucide-react';
 import { listProfiles } from '@/db/profiles';
 import { supabase } from '@/lib/supabaseClient';
+import { listUserActivity } from '@/db/activity';
 
 // Function to calculate days remaining in membership
 const calculateDaysRemaining = (subscriptionDate: string, renewIntervalDays: number = 30): number => {
@@ -91,10 +92,35 @@ const MonitorStudents = () => {
             subscriptionDate: p.subscriptionDate || '',
             membershipType: p.membershipType || 'TOP G',
             renewIntervalDays: p.renewIntervalDays || 30,
-            lastActivity: undefined, // activity logs migration out of scope
+            lastActivity: undefined,
           };
           studentsData.push(studentData);
         }
+
+        try {
+          const latestPerUser = await Promise.all(
+            studentsData.map(async (s) => {
+              try {
+                const logs = await listUserActivity(s.uid, 1);
+                const ts = logs[0]?.timestamp;
+                const d =
+                  ts && typeof ts.toDate === 'function'
+                    ? ts.toDate()
+                    : ts
+                    ? new Date(ts)
+                    : undefined;
+                return { uid: s.uid, lastActivity: d };
+              } catch {
+                return { uid: s.uid, lastActivity: undefined };
+              }
+            })
+          );
+          const map = new Map<string, Date | undefined>();
+          latestPerUser.forEach((r) => map.set(r.uid, r.lastActivity));
+          studentsData.forEach((s) => {
+            s.lastActivity = map.get(s.uid);
+          });
+        } catch {}
 
         // Sort by last activity (most recent first)
         studentsData.sort((a, b) => {

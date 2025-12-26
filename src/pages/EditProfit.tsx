@@ -133,10 +133,10 @@ const EditProfit = () => {
     const newPreviews: string[] = [];
 
     fileArray.forEach(file => {
-      if (file.size > 300 * 1024) { // 300KB limit
+      if (file.size > 500 * 1024) { // 500KB limit
         toast({
           title: "File size too large",
-          description: `File ${file.name} must be less than 300 KB`,
+          description: `File ${file.name} must be less than 500 KB`,
           variant: "destructive",
         });
         return;
