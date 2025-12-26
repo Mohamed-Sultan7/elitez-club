@@ -1,11 +1,21 @@
 
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import GoldButton from '@/components/GoldButton';
 import ParticleBackground from '@/components/ParticleBackground';
 import { ArrowRight, LogIn } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
 
 const Launcher = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate('/home');
+    }
+  }, [user, navigate]);
+
   return (
 <div className="min-h-screen flex flex-col items-center justify-center relative p-4 bg-background">
     <ParticleBackground />
