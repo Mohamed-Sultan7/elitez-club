@@ -294,22 +294,21 @@ export async function createLesson(courseId: string, moduleId: string, row: Omit
 }
 
 export async function updateLesson(courseId: string, moduleId: string, lessonId: string, data: Partial<Lesson>): Promise<void> {
-  const payload: Partial<LessonRow> = {
-    title: data.title,
-    description: data.description ?? null,
-    type: data.type ?? null,
-    video_url: data.videoUrl ?? null,
-    audio_url: data.audioUrl ?? null,
-    duration: data.duration ?? null,
-    locked: typeof data.locked === 'boolean' ? data.locked : undefined,
-    completed: data.completed ?? null,
-    transcript: data.transcript ?? null,
-    text_content: data.textContent ?? null,
-    resources: data.resources ?? undefined,
-    notes: data.notes ?? undefined,
-    order: data.order,
-    updated_at: data.updatedAt ?? null,
-  }
+  const payload: Partial<LessonRow> = {}
+  if (data.title !== undefined) payload.title = data.title
+  if (data.description !== undefined) payload.description = data.description
+  if (data.type !== undefined) payload.type = data.type
+  if (data.videoUrl !== undefined) payload.video_url = data.videoUrl
+  if (data.audioUrl !== undefined) payload.audio_url = data.audioUrl
+  if (data.duration !== undefined) payload.duration = data.duration as number | null
+  if (typeof data.locked === 'boolean') payload.locked = data.locked
+  if (data.completed !== undefined) payload.completed = data.completed
+  if (data.transcript !== undefined) payload.transcript = data.transcript
+  if (data.textContent !== undefined) payload.text_content = data.textContent
+  if (data.resources !== undefined) payload.resources = data.resources
+  if (data.notes !== undefined) payload.notes = data.notes
+  if (data.order !== undefined) payload.order = data.order
+  if (data.updatedAt !== undefined) payload.updated_at = data.updatedAt
   const { error } = await supabase
     .from('course_lessons')
     .update(payload)
