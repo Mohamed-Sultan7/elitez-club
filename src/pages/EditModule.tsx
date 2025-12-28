@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
-import { getCourse, listLessons, listModules, updateModule as updateModuleDb, deleteModule as deleteModuleDb, deleteLesson as deleteLessonDb } from '@/db/courses';
+import { getCourse, listLessons, listModules, updateModule as updateModuleDb, deleteModule as deleteModuleDb, deleteLesson as deleteLessonDb, updateLesson } from '@/db/courses';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import MainLayout from '@/components/MainLayout';
 import GlassmorphicCard from '@/components/GlassmorphicCard';
@@ -82,10 +82,36 @@ const EditModule = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  // Save the new lesson order to Firestore
+  // Save the new lesson order to database
   const saveNewLessonOrder = async () => {
-    // Functionality removed as part of Firebase cleanup
-    console.warn("Saving lesson order is temporarily disabled during migration.");
+    if (!courseId || !moduleId) return;
+    
+    setIsSavingOrder(true);
+    try {
+      // Create an array of promises to update all lessons
+      const updatePromises = lessons.map((lesson, index) => {
+        return updateLesson(courseId, moduleId, lesson.id, {
+          order: index
+        });
+      });
+      
+      await Promise.all(updatePromises);
+      
+      setIsOrderChanged(false);
+      toast({
+        title: "Success",
+        description: "Lesson order saved successfully",
+      });
+    } catch (err) {
+      console.error('Error saving lesson order:', err);
+      toast({
+        title: "Error",
+        description: "Failed to save lesson order",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSavingOrder(false);
+    }
   };
 
   // Handle drag end event
@@ -610,10 +636,27 @@ const EditModule = () => {
           </Link>
         </div>        
 
-        {/* Save Order Button - Removed due to Firebase migration */}
+        {/* Save Order Button */}
         {isOrderChanged && (
-          <div className="mb-4">
-             <p className="text-white/60 text-sm mt-2">Lesson order changed. Saving is temporarily disabled.</p>
+          <div className="mb-4 flex items-center justify-between bg-yellow-900/20 border border-yellow-500/30 p-4 rounded-lg">
+             <div className="flex items-center">
+               <Clock className="w-5 h-5 text-yellow-500 mr-2" />
+               <p className="text-yellow-200 text-sm">Lesson order has changed. Don't forget to save.</p>
+             </div>
+             <GoldButton 
+               onClick={saveNewLessonOrder} 
+               disabled={isSavingOrder}
+               size="sm"
+             >
+               {isSavingOrder ? (
+                 <>
+                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                   Saving...
+                 </>
+               ) : (
+                 <>Save Order</>
+               )}
+             </GoldButton>
           </div>
         )}
 

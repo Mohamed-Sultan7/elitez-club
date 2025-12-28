@@ -30,6 +30,7 @@ const GoldButton = ({
         loading && "opacity-70 cursor-not-allowed",
         className
       )}
+      size={size}
       disabled={loading}
       {...props}
     >
